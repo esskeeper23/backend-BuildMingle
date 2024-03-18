@@ -4,7 +4,7 @@ const getAllUsers = (req, res) => {
     usersControllers
         .getAllUsers()
         .then((data) => {
-            res.status(200).json(data)
+          res.status(200).json(data)
         })
         .catch((err) => {
             res.status(400).json({message: err.message})
@@ -104,6 +104,19 @@ const deleteUser = (req, res) => {
       })
 }
 
+const getMyUser = (req, res) => {
+  const id = req.params.id
+
+  usersControllers
+    .getUserById(id)
+    .then((data) => {
+      res.status(200).json(data)
+    })
+    .catch((err) => {
+      res.status(400).json({message: err.message})
+    })
+} 
+
 const patchMyUser = (req, res) => {
     const id = req.user.id
     const { firstName, lastName, phone, birthdate, gender, country } = req.body
@@ -138,5 +151,6 @@ module.exports = {
     registerUser,
     deleteUser,
     deleteMyUser,
-    patchUser
+    patchUser,
+    getMyUser
 }
